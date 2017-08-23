@@ -98,11 +98,11 @@ declare namespace Office {
         Universal
     }
     // Objects
-    export interface AsyncResult {
+    export interface AsyncResult<T> {
         asyncContext: any;
         status: AsyncResultStatus;
         error: Error;
-        value: any;
+        value: T;
     }
     export interface Context {
         auth: Auth;
@@ -155,7 +155,7 @@ declare namespace Office {
         * @param options Optional. Accepts a DialogOptions object to define dialog behaviors.
         * @param callback Optional. Accepts a callback method to handle the dialog creation attempt.
         */
-        displayDialogAsync(startAddress: string, options?: DialogOptions, callback?: (result: AsyncResult) => void): void;
+        displayDialogAsync(startAddress: string, options?: DialogOptions, callback?: (result: AsyncResult<DialogHandler>) => void): void;
         /**
          * Synchronously delivers a message from the dialog to its parent add-in.
          * @param messageObject Accepts a message from the dialog to deliver to the add-in.
@@ -191,7 +191,7 @@ declare namespace Office {
         * @param options Optional. Accepts an AuthOptions object to define sign-on behaviors.
         * @param callback Optional. Accepts a callback method to handle the token acquisition attempt. If AsyncResult.status is "succeeded", then AsyncResult.value is the raw AAD v. 2.0-formatted access token.
         */
-        getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult) => void): void;		
+        getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;		
     }
     export interface AuthOptions {
         /**
@@ -460,7 +460,7 @@ declare namespace Office {
          *       asyncContext: Object keeping state for the callback
          * @param callback The optional callback method
          */
-        removeHandlerAsync(eventType: EventType, options?: any, callback?: (result: AsyncResult) => void): void;
+        removeHandlerAsync(eventType: EventType, options?: any, callback?: (result: AsyncResult<undefined>) => void): void;
         /**
          * Writes the specified data into the current selection.
          * @param data The data to be set. Either a string or value, 2d array or TableData object
@@ -471,7 +471,7 @@ declare namespace Office {
          *       asyncContext: Object keeping state for the callback
          * @param callback The optional callback method
          */
-        setDataAsync(data: TableData | any, options?: any, callback?: (result: AsyncResult) => void): void;
+        setDataAsync(data: TableData | any, options?: any, callback?: (result: AsyncResult<undefined>) => void): void;
     }
     export interface Bindings {
         document: Document;
