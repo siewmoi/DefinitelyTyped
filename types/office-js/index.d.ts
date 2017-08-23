@@ -737,6 +737,7 @@ declare namespace Office {
          *       asyncContext: Object keeping state for the callback
          * @param callback The optional callback method
          */
+        getSelectedDataAsync(coercionType: "text", options?: any, callback?: (result: AsyncResult<string>) => void): void;
         getSelectedDataAsync(coercionType: CoercionType | "text" | "matrix" | "table" | "html" | "ooxml" | "slideRange", options?: any, callback?: (result: AsyncResult<any>) => void): void;
         /**
          * Goes to the specified object or location in the document.
